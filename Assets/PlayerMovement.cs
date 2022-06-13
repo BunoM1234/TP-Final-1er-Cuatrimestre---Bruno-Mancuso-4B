@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
-        if(Input.GetKey(KeyCode.Space) && isGrounded)
+        if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
             rb.velocity = jumpSpeed;
             isGrounded = false;
