@@ -16,11 +16,21 @@ public class PlayerMovement : MonoBehaviour
     public float horizontalInput;
     public float horizontalMultiplier;
 
+    public AudioClip risadeardilla;
+
+    AudioSource fuenteAudio;
+
+    void Start()
+    {
+        fuenteAudio = GetComponent<AudioSource>();
+    }
+
     private void Awake()
     {
         Physics.gravity = gravity;
         rb = GetComponent<Rigidbody>();
     }
+
     private void FixedUpdate()
     {
         Vector3 forwardMove = transform.forward * speed * Time.fixedDeltaTime;
@@ -40,6 +50,8 @@ public class PlayerMovement : MonoBehaviour
     }
     void OnCollisionEnter(Collision col)
     {
+        fuenteAudio.clip = risadeardilla;
         isGrounded = true;
+        fuenteAudio.Play();
     }
 }
