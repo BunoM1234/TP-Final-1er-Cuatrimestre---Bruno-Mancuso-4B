@@ -6,19 +6,21 @@ public class PlayerController : MonoBehaviour
 {
     public float movementSpeed;
     public float rotationSpeed;
-    public float jumpForce;
-    public int maxJumps;
-    public GameObject jugador;
+    public Vector3 gravity;
+    public Vector3 jumpSpeed;
     public GameObject camara;
 
-    int hasJump;
+    bool isGrounded = false;
     Rigidbody rb;
-    float CamaraY = 2.818f;
-    float CamaraX = -3.51f;
 
-    void Start()
+    public GameObject jugador;
+
+    float CamaraY = 5.07f;
+    float CamaraX = -3.43f;
+
+    void Awake()
     {
-        hasJump = maxJumps;
+        Physics.gravity = gravity;
         rb = GetComponent<Rigidbody>();
     }
 
@@ -40,18 +42,16 @@ public class PlayerController : MonoBehaviour
         {
             transform.position += new Vector3(0, 0, movementSpeed);
         }
-        if (Input.GetKey(KeyCode.Space) && hasJump > 0)
+        if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-
-            hasJump--;
+            rb.velocity = jumpSpeed;
+            isGrounded = false;
         }
     }
     void OnCollisionEnter(Collision col)
     {
-        if(col.gameObject.tag == "Respawn")
-        {
-            hasJump = maxJumps;
-        }
+       
+       isGrounded = true;
+        
     }
 }
