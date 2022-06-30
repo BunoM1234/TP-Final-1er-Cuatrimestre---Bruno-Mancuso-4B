@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿
 using System.Collections;
 using System.Collections.Generic;
@@ -15,11 +16,34 @@ public class PlayerCollision : MonoBehaviour
     void Start()
     {
         
+=======
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+public class PlayerCollision : MonoBehaviour
+{
+    public Text contMuertes;
+    int muertes;
+    Vector3 posInicial;
+
+    public AudioClip risadeardilla;
+
+    AudioSource fuenteAudio;
+
+    void Start()
+    {
+        fuenteAudio = GetComponent<AudioSource>();
+        posInicial = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+>>>>>>> 221b5405b3fd3317c831f745a7b49280e1bb4eb0
     }
 
     // Update is called once per frame
     void Update()
     {
+<<<<<<< HEAD
         
     }
 
@@ -35,4 +59,20 @@ public class PlayerCollision : MonoBehaviour
             
     }
     
+=======
+
+    }
+
+    private void OnCollisionEnter(Collision col)
+    {
+        if(col.gameObject.name == "Obstacle" || col.gameObject.name == "Helice")
+        {
+            transform.position = posInicial;
+            muertes++;
+            contMuertes.text = "Muertes: " + muertes;
+            fuenteAudio.clip = risadeardilla;
+            fuenteAudio.Play();
+        }
+    }
+>>>>>>> 221b5405b3fd3317c831f745a7b49280e1bb4eb0
 }
